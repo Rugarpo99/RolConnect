@@ -1,18 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Ruta para la página de inicio no registrada
+Route::get('/', [HomeController::class, 'index'])->name('home.notregistered');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Ruta para la página de inicio de sesión
+Route::get('/login', function () {
+    return view('auth.login'); // Asegúrate de que 'auth.login' sea la vista correcta
+})->name('login');
+
+// Otras rutas que puedas tener
+// Route::get('/about', [AboutController::class, 'index'])->name('about');
+// ... añade aquí más rutas según tu aplicación
