@@ -23,16 +23,18 @@
             justify-content: space-between;
             align-items: center;
             background-color: #1e40af;
-            padding: 5px 30px;
+            padding: 15px 30px;
+            box-sizing: border-box;
         }
 
         .logo {
-            height: 100px;
+            height: 80px;
+            /* Ajuste el tamaño del logo */
         }
 
         .login-button {
             background-color: #10b981;
-            padding: 10px 15px;
+            padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
             color: white;
@@ -52,10 +54,13 @@
             flex: 1;
         }
 
+        /* Distribuir las tarjetas en 3 columnas en pantallas grandes */
         .grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columnas */
             gap: 20px;
+            margin-top: 20px;
         }
 
         .card {
@@ -64,6 +69,11 @@
             border-radius: 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            height: 300px;
+            /* Establecer una altura para las tarjetas */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover {
@@ -73,8 +83,10 @@
 
         .card-img {
             width: 100%;
+            height: 180px;
             border-radius: 10px;
             object-fit: cover;
+            margin-bottom: 15px;
         }
 
         .footer {
@@ -83,6 +95,33 @@
             padding: 15px;
             margin-top: 20px;
             font-size: 14px;
+        }
+
+        /* Media query para pantallas más pequeñas */
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 columnas */
+            }
+        }
+
+        /* Media query para pantallas muy pequeñas (móviles) */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                /* Una sola columna */
+            }
+
+            .logo {
+                height: 70px;
+                /* Reducir el tamaño del logo en móviles */
+            }
+
+            .login-button {
+                font-size: 14px;
+                /* Ajustar el tamaño del texto del botón */
+                padding: 8px 15px;
+            }
         }
     </style>
 </head>

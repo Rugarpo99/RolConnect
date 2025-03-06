@@ -15,12 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('nombre_usuario');
+            $table->string('correo')->unique();
+            $table->string('contraseña');
+            $table->timestamp('fecha_registro')->nullable();
+            $table->integer('seguidores')->default(0);
+            $table->integer('num_posts')->default(0);
+            $table->timestamps(); // Agrega las columnas created_at y updated_at
             $table->rememberToken();
-            $table->timestamps();
         });
     }
 

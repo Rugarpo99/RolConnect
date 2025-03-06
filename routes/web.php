@@ -1,16 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 
-// Ruta para la página de inicio no registrada
-Route::get('/', [HomeController::class, 'index'])->name('home.notregistered');
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Ruta para la página de inicio de sesión
-Route::get('/login', function () {
-    return view('auth.login'); // Asegúrate de que 'auth.login' sea la vista correcta
-})->name('login');
+Route::get('/home-registered', function () {
+    return view('auth.homeregistered');
+})->middleware('auth')->name('home.registered');
 
-// Otras rutas que puedas tener
-// Route::get('/about', [AboutController::class, 'index'])->name('about');
-// ... añade aquí más rutas según tu aplicación
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+
+// Ruta para usuarios NO registrados
+Route::get('/', function () {
+    return view('homenotregistered');
+})->name('homenotregistered');

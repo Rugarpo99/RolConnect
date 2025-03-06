@@ -2,43 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash; // Importa la clase Hash
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    // Atributos que se pueden asignar masivamente
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nombre_usuario',
+        'correo',
+        'contraseña',
+        'fecha_registro',
+        'seguidores',
+        'num_posts',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    // Atributos que deben estar ocultos cuando se serializa el modelo
     protected $hidden = [
-        'password',
+        'contraseña',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // Deshabilitar las marcas de tiempo automáticas
+    public $timestamps = false;
+
+    // Mutador para encriptar la contraseña antes de guardarla en la base de datos
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['contraseña'] = Hash::make($password);
+    }
 }
